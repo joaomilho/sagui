@@ -50,6 +50,12 @@ program.command(actions.TEST)
   .option('-c, --coverage', 'Generate a coverage report')
   .action(setupAction(actions.TEST))
 
+program.command(actions.INTEGRATION_TEST)
+  .description('Run integration tests')
+  .option('-w, --watch', 'Run integration tests on any file change')
+  .option('-c, --coverage', 'Generate a coverage report')
+  .action(setupAction(actions.INTEGRATION_TEST))
+
 program.command(actions.LINT)
   .description('Lint the code')
   .action(setupAction(actions.LINT))

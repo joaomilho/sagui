@@ -4,29 +4,23 @@ import developmentServer from './development-server'
 import install from './install'
 import lint from './lint'
 import test from './test'
+import integrationTest from './integration-test'
 import typecheck from './typecheck'
 
+const actionsMap = {
+  [actions.BUILD]: build,
+  [actions.DEVELOP]: developmentServer,
+  [actions.INSTALL]: install,
+  [actions.LINT]: lint,
+  [actions.TEST]: test,
+  [actions.INTEGRATION_TEST]: integrationTest,
+  [actions.TYPECHECK]: typecheck
+}
+
+// throw actionsMap.develop
 export default (saguiOptions) => {
-  switch (saguiOptions.action) {
-    case actions.BUILD:
-      return build(saguiOptions)
-
-    case actions.DEVELOP:
-      return developmentServer(saguiOptions)
-
-    case actions.INSTALL:
-      return install(saguiOptions)
-
-    case actions.LINT:
-      return lint(saguiOptions)
-
-    case actions.TEST:
-      return test(saguiOptions)
-
-    case actions.TYPECHECK:
-      return typecheck(saguiOptions)
-
-    default:
-      return Promise.reject('A valid action is required.')
-  }
+  // throw JSON.stringify(actionsMap)
+  return actionsMap[saguiOptions.action]
+    ? actionsMap[saguiOptions.action](saguiOptions)
+    : Promise.reject('A valid action is required.')
 }

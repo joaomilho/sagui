@@ -4,5 +4,9 @@ export default {
   INSTALL: 'install',
   LINT: 'lint',
   TEST: 'test',
-  TYPECHECK: 'typecheck'
+  INTEGRATION_TEST: 'integration_test',
+  TYPECHECK: 'typecheck',
+  isTest: (action) => {
+    return ['test', 'integration_test'].includes(action)
+  }
 }
